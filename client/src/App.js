@@ -3,8 +3,7 @@ import './App.css';
 import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
 import axios from 'axios';
-import Popup from 'react-popup';
-import './Popup.css';
+
 
 class App extends Component {
   constructor() {
@@ -40,7 +39,7 @@ class App extends Component {
       .then(result => {
         console.log(result);
         if (result.data === 'Not found') {
-          Popup.alert('Movie Not Found');
+          
         }
         this.getAllSongs();
       })
@@ -92,7 +91,7 @@ class App extends Component {
             <p />
           </div>
           <div>
-            <Popup />
+            
           </div>
         </div>
 
