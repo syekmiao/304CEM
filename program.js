@@ -5,18 +5,19 @@ const axios = require('axios');
 const path = require('path');
 
 const PORT = process.env.PORT || 5000;
-var songName, songArtist, songLyrics, songImage, songId; //matches;
+var songName, songArtist, duration, genre, album, songImage;
+var songLyrics, songId; 
 
 app.get('/getmusic', (req, res) => {
     const title = req.query.title;
     const options = {
         method: 'GET',
-        url: 'https://geniurl.p.rapidapi.com/search',
-        params: {q: `${title}`},
-        headers: {
-          'X-RapidAPI-Key': '1719282c54mshab269b6f7a23c4ap14299bjsnfb62e3e72751',
-          'X-RapidAPI-Host': 'geniurl.p.rapidapi.com'
-        }
+  url: 'https://soundcloud-scraper.p.rapidapi.com/v1/search/tracks',
+  params: {term: `${title}`},
+  headers: {
+    'X-RapidAPI-Key': '1719282c54mshab269b6f7a23c4ap14299bjsnfb62e3e72751',
+    'X-RapidAPI-Host': 'soundcloud-scraper.p.rapidapi.com'
+  }
     };
     
     axios.request(options).then( (response) =>{
@@ -24,9 +25,12 @@ app.get('/getmusic', (req, res) => {
         //matches = response.data.matches;
 
         //for (let i=0; i<= matches; i++){
-        songName = response.data.top.meta.title;
-        songArtist = response.data.top.meta.artists;
-        songImage = response.data.top.resources.image;
+        songName = response.data.tracks.items[0].title;
+        songArtist = response.data.tracks.items[0].publisher.artist;
+        songImage = response.data.tracks.items[0].artworkUrl;
+        duration = response.data.tracks.items[0].durationText;
+        album = response.data.tracks.items[0].publisher.albumTitle;
+        genre = response.data.tracks.items[0].genre;
     
         const options2 = {
             method: 'GET',
@@ -46,8 +50,11 @@ app.get('/getmusic', (req, res) => {
                 songId:songId,
                 songName:songName,
                 songArtist:songArtist,
-                songLyrics:songLyrics,
-                songImage:songImage
+                songImage:songImage,
+                duration:duration,
+                album:album,
+                genre:genre,
+                songLyrics:songLyrics
             });
 
             if (!songValue.songName) {

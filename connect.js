@@ -16,8 +16,11 @@ const songSchema = mongoose. Schema ({
     songId : { type : String }, 
     songName : { type : String }, 
     songArtist : { type : String }, 
-    songLyrics : { type : String }, 
-    songImage : { type : String }
+    songImage : { type : String },
+    duration : { type : String },
+    album: { type : String },
+    genre: { type : String },
+    songLyrics : { type : String }
     }); 
   
 const Record =  mongoose . model ( 'songs' ,  songSchema, 'songCollection' );   

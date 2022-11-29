@@ -79,7 +79,8 @@ class App extends Component {
           <div className="col-sm-12">
             <p />
             <form onSubmit={this.handleSubmit}>
-              <label>Enter song name:</label>
+              <h3>Enter song name:</h3>
+              <label>Enter the artist as well for more accurate search result</label>
               <input
                 type="text"
                 className="form-control"
@@ -119,6 +120,18 @@ class App extends Component {
                 {
                   Header: 'Artist',
                   accessor: 'songArtist'
+                },
+                {
+                  Header: 'Genre',
+                  accessor: 'genre'
+                },
+                {
+                  Header: 'Song Duration',
+                  accessor: 'duration'
+                },
+                {
+                  Header: 'Album',
+                  accessor: 'album'
                 },
                 {
                   Header: 'Lyrics',
